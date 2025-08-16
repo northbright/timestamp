@@ -30,11 +30,8 @@ func ExampleTimestamp() {
 	}
 
 	for _, f := range fArr {
-		ts, err := timestamp.NewFromSecond(f)
-		if err != nil {
-			log.Printf("NewFromSecondStr() error: %v", err)
-			return
-		}
+		ts := timestamp.NewFromSecond(f)
+
 		fmt.Printf("%f -> String(): %s, StringForSRT(): %s, SecondStr(): %s\n", f, ts.String(), ts.StringForSRT(), ts.SecondStr())
 	}
 

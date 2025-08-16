@@ -45,7 +45,7 @@ func New(str string) (*Timestamp, error) {
 }
 
 // NewFromSecond converts the seconds in float to a timestamp.
-func NewFromSecond(second float32) (*Timestamp, error) {
+func NewFromSecond(second float32) *Timestamp {
 	integer, frac := math.Modf(float64(second))
 	sec := int(integer)
 
@@ -57,7 +57,7 @@ func NewFromSecond(second float32) (*Timestamp, error) {
 	mm := sec / 3600 % 60
 	ss := sec % 3600 % 60
 
-	return &Timestamp{hh: hh, mm: mm, ss: ss, mmm: mmm}, nil
+	return &Timestamp{hh: hh, mm: mm, ss: ss, mmm: mmm}
 }
 
 // Str returns the timestamp string.
@@ -96,7 +96,7 @@ func (ts *Timestamp) SecondStr() string {
 }
 
 // Sub returns a new timestamp which = ts1 - ts2.
-// It returns an error if ts1 >= ts2.
+// It returns an error if ts1 < ts2.
 func (ts1 *Timestamp) Sub(ts2 *Timestamp) (*Timestamp, error) {
 	sec1 := ts1.Second()
 	sec2 := ts2.Second()
@@ -105,5 +105,5 @@ func (ts1 *Timestamp) Sub(ts2 *Timestamp) (*Timestamp, error) {
 		return nil, fmt.Errorf("ts1 < ts2")
 	}
 
-	return NewFromSecond(sec1 - sec2)
+	return NewFromSecond(sec1 - sec2), nil
 }
