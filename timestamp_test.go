@@ -26,6 +26,9 @@ func ExampleTimestamp() {
 	fArr := []float32{
 		0.0,
 		3.14,
+		60,
+		3600,
+		7261,
 		3882.46000,
 	}
 
@@ -41,5 +44,8 @@ func ExampleTimestamp() {
 	// 20:30:40,900 -> String(): 20:30:40.900, StringForSRT(): 20:30:40,900, SecondStr(): 73840.900
 	// 0.000000 -> String(): 00:00:00.000, StringForSRT(): 00:00:00,000, SecondStr(): 0.000
 	// 3.140000 -> String(): 00:00:03.140, StringForSRT(): 00:00:03,140, SecondStr(): 3.140
-	// 3882.459961 -> String(): 01:01:42.460, StringForSRT(): 01:01:42,460, SecondStr(): 3702.460
+	// 60.000000 -> String(): 00:01:00.000, StringForSRT(): 00:01:00,000, SecondStr(): 60.000
+	// 3600.000000 -> String(): 01:00:00.000, StringForSRT(): 01:00:00,000, SecondStr(): 3600.000
+	// 7261.000000 -> String(): 02:01:01.000, StringForSRT(): 02:01:01,000, SecondStr(): 7261.000
+	// 3882.459961 -> String(): 01:04:42.460, StringForSRT(): 01:04:42,460, SecondStr(): 3882.460
 }

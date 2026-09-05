@@ -54,8 +54,8 @@ func NewFromSecond(second float32) *Timestamp {
 	mmm, _ := strconv.Atoi(str)
 
 	hh := sec / 3600
-	mm := sec / 3600 % 60
-	ss := sec % 3600 % 60
+	mm := (sec - hh*3600) / 60
+	ss := sec - hh*3600 - mm*60
 
 	return &Timestamp{hh: hh, mm: mm, ss: ss, mmm: mmm}
 }
