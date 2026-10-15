@@ -9,6 +9,8 @@ import (
 
 func ExampleTimestamp() {
 	arr := []string{
+		"9",
+		"9.659000",
 		"00:00:00",
 		"10:20:30.500",
 		"20:30:40,900",
@@ -39,6 +41,8 @@ func ExampleTimestamp() {
 	}
 
 	// Output:
+	// 9 -> String(): 00:00:09.000, StringForSRT(): 00:00:09,000, SecondStr(): 9.000
+	// 9.659000 -> String(): 00:00:09.659, StringForSRT(): 00:00:09,659, SecondStr(): 9.659
 	// 00:00:00 -> String(): 00:00:00.000, StringForSRT(): 00:00:00,000, SecondStr(): 0.000
 	// 10:20:30.500 -> String(): 10:20:30.500, StringForSRT(): 10:20:30,500, SecondStr(): 37230.500
 	// 20:30:40,900 -> String(): 20:30:40.900, StringForSRT(): 20:30:40,900, SecondStr(): 73840.900

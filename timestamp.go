@@ -19,11 +19,22 @@ type Timestamp struct {
 
 // New parses the given string and returns a timestamp.
 // Accepted timestamp string formats:
-// 1. "HH:MM:SS"
-// 2. "HH:MM:SS.mmm"
-// 3. "HH:MM:SS,mmm"
+// 1. "SS.SSSSSS", unit: second. It can be the duration string returned by ffprobe.
+// 2. "HH:MM:SS"
+// 3. "HH:MM:SS.mmm"
+// 4. "HH:MM:SS,mmm"
 func New(str string) (*Timestamp, error) {
-	re := regexp.MustCompile(`^(\d{2}):([0-5][0-9]):([0-5][0-9])([\.|,](\d{3}))?$`)
+	// Try "SS.SSSSSS".
+	re := regexp.MustCompile(`^(\d+)(\.(\d+))?$`)
+	if re.MatchString(str) {
+		f, err := strconv.ParseFloat(str, 32)
+		if err != nil {
+			return nil, fmt.Errorf("parse %s to float32 error: %v", str, err)
+		}
+		return NewFromSecond(float32(f)), nil
+	}
+
+	re = regexp.MustCompile(`^(\d{2}):([0-5][0-9]):([0-5][0-9])([\.|,](\d{3}))?$`)
 	arr := re.FindStringSubmatch(str)
 	l := len(arr)
 
